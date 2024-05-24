@@ -4,7 +4,7 @@ services:
   python:
     build:
       context: .
-      dockerfile: ./api/Dockerfile
+      dockerfile: Dockerfile
     volumes:
       - .:/code
       - 003_zsh_history_python:/home/alx/zsh_history
