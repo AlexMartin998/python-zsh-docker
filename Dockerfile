@@ -16,6 +16,9 @@ RUN sed -i -e "s/bin\/ash/bin\/zsh/" /etc/passwd
 # set 'admin' as password for alx
 RUN echo 'alx:admin' | chpasswd
 
+# Give alx sudo privileges
+RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+
 USER root
 RUN mkdir -p /home/alx/.vscode-server/extensions && chown -R alx:alx /home/alx/.vscode-server
 USER alx
