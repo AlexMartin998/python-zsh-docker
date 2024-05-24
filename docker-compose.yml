@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  python:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    volumes:
+      - .:/code
+      - 003_zsh_history_python:/home/alx/zsh_history
+      - 003_vscode_extensions_python:/home/alx/.vscode-server/extensions
+    ports:
+      - 8000:8000
+volumes:
+  003_zsh_history_python:
+    external: true
+  003_vscode_extensions_python:
+    external: true
