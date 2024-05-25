@@ -6,7 +6,9 @@ RUN apk update
 
 # Install Zsh, curl, git, and sudo
 RUN apk add zsh curl git sudo
-RUN apk add gcc musl-dev python3-dev linux-headers
+
+# only if you need to install packages that require compilation - jupyter notebook
+# RUN apk add gcc musl-dev python3-dev linux-headers
 
 # Create a new user "alx" and switch to that user
 RUN adduser -D alx && echo "alx:alx" | chpasswd && addgroup alx wheel
