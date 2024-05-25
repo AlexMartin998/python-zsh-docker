@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/code
+      - ./src:/code
       - 003_zsh_history_python:/home/alx/zsh_history
       - 003_vscode_extensions_python:/home/alx/.vscode-server/extensions
     ports:

@@ -6,6 +6,7 @@ RUN apk update
 
 # Install Zsh, curl, git, and sudo
 RUN apk add zsh curl git sudo
+RUN apk add gcc musl-dev python3-dev linux-headers
 
 # Create a new user "alx" and switch to that user
 RUN adduser -D alx && echo "alx:alx" | chpasswd && addgroup alx wheel
@@ -58,5 +59,7 @@ ADD . /code
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
+
+RUN pip install virtualenv
 
 CMD ["tail", "-f", "/dev/null"]
