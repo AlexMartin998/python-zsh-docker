@@ -5,14 +5,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: python_zsh_dev
     volumes:
-      - ./src:/code
-      - 003_zsh_history_python:/home/alx/zsh_history
-      - 003_vscode_extensions_python:/home/alx/.vscode-server/extensions
+      - .:/code
+      - zsh_history_python_01:/home/alx/zsh_history
+      - vscode_extensions_python_01:/home/alx/.vscode-server/extensions
     ports:
       - 8000:8000
 volumes:
-  003_zsh_history_python:
+  zsh_history_python_01:
     external: true
-  003_vscode_extensions_python:
+  vscode_extensions_python_01:
     external: true

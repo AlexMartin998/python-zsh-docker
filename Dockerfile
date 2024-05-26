@@ -1,26 +1,21 @@
-# Start from the Python 3.10 image
-FROM python:3.12-alpine AS base
+# Start from the Python 3.x image
+FROM python:3.12-slim AS base
 
 # Update the list of available packages
-RUN apk update
+RUN apt-get update -y
+RUN apt update
 
-# Install Zsh, curl, git, and sudo
-RUN apk add zsh curl git sudo
-
-# only if you need to install packages that require compilation - jupyter notebook
-# RUN apk add gcc musl-dev python3-dev linux-headers
+# Install Zsh, curl and git
+RUN apt-get install -y zsh curl git sudo
 
 # Create a new user "alx" and switch to that user
-RUN adduser -D alx && echo "alx:alx" | chpasswd && addgroup alx wheel
+RUN useradd -m alx && echo "alx:alx" | chpasswd && adduser alx sudo
 
 # Change the default shell for "alx" to Zsh
-RUN sed -i -e "s/bin\/ash/bin\/zsh/" /etc/passwd
+RUN chsh -s /bin/zsh alx
 
 # set 'admin' as password for alx
 RUN echo 'alx:admin' | chpasswd
-
-# Give alx sudo privileges
-RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
 
 USER root
 RUN mkdir -p /home/alx/.vscode-server/extensions && chown -R alx:alx /home/alx/.vscode-server
@@ -61,7 +56,5 @@ ADD . /code
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
-
-RUN pip install virtualenv
 
 CMD ["tail", "-f", "/dev/null"]
