@@ -8,6 +8,9 @@ RUN apt update
 # Install Zsh, curl and git
 RUN apt-get install -y zsh curl git sudo
 
+# only if you need to install packages that require compilation - jupyter notebook
+# RUN apk add gcc musl-dev python3-dev linux-headers
+
 # Create a new user "alx" and switch to that user
 RUN useradd -m alx && echo "alx:alx" | chpasswd && adduser alx sudo
 
